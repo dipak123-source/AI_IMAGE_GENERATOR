@@ -7,8 +7,8 @@ import { Routes } from 'react-router-dom';
 import Navbar from './components/Navbar';
 const Container = styled.div`
   width: 100%;
-  height: 100%;
-  dispaly: flex;
+  height: 100vh;
+  display: flex;
   background: ${({ theme}) => theme.bg};
   color: ${({ theme })=> theme.text_primary};
   overflow-x: hidden;
@@ -16,10 +16,10 @@ const Container = styled.div`
   transition: all 0.2s ease;`;
 
 const Wrapper = styled.div`
-  hieght: 100%;
+  height: 100%;
   position: relative;
   display: flex;
-  flex-direation: column;
+  flex-direction: column;
   justify-content: space-between;
   flex: 3;`;
 function App() {
@@ -33,8 +33,6 @@ function App() {
           <Route path='/post' exact element = {<CreatePost />} />
         </Routes>
         </BrowserRouter>
-        <Home />
-        <CreatePost/>
       </Wrapper>
     </Container>
   </ThemeProvider>)
