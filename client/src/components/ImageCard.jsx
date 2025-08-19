@@ -5,6 +5,7 @@ import { scale } from '@mui/icons-material';
 import { Avatar } from '@mui/material';
 import { DownloadRounded } from '@mui/icons-material';
 import FileSaver from 'file-saver';
+
 const Card = styled.div`
     position: relative;
     display: flex;
@@ -58,10 +59,10 @@ const Author = styled.div`
 const ImageCard = ({item}) => {
   return (
    <Card>
-    <LazyLoadImage src = {item?.photo} />
+    <LazyLoadImage alt={item?.prompt} style={{borderRadius: "12px"}} width="100%" src = {item?.photo} />
     <HoverOverlay>
         <Prompt>{item?.prompt}</Prompt>
-        <div style={{width: '100%',
+        <div style={{width: "100%",
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between'

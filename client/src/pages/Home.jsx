@@ -59,7 +59,7 @@ const Home = () => {
   const item = {
     photo: "https://images.unsplash.com/photo-1612144431180-2d672779556c?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c21hbGwlMjBzaXplfGVufDB8fDB8fHww",
     author: "Dipak Paswan",
-    prompt: "HEY Prompt"
+    prompt: "HEY Prompt !"
   }
   return (
     <Container>
@@ -69,6 +69,12 @@ const Home = () => {
       <Searchbar />
       <Wrapper>
         <CardWrapper>
+          <ImageCard item={item}/>
+          <ImageCard item={item}/>
+          <ImageCard item={item}/>
+          <ImageCard item={item}/>
+          <ImageCard item={item}/>
+          <ImageCard item={item}/>
           <ImageCard item={item}/>
         </CardWrapper>
       </Wrapper>
