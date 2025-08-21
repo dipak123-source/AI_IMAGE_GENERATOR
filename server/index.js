@@ -3,6 +3,7 @@ import express from "express";
 import mongoose, { mongo } from "mongoose";
 import * as dotenv from "dotenv";
 import { error } from 'console';
+import PostRoute from "./routes/Posts.route.js";
 
 dotenv.config();
 
@@ -11,6 +12,7 @@ app.use(cors());
 app.use(express.json({ limit: "50mb"}));
 app.use(express.urlencoded({ extended: true}));
 
+app.use("/api/post", PostRoute);
 //error handling middleware
 app.use((err, req, res, next)=>{
     const status = err.status || 500;
@@ -21,6 +23,7 @@ app.use((err, req, res, next)=>{
         message,
     })
 })
+
 
 //Default get
 app.get("/", async (req, res)=>{
