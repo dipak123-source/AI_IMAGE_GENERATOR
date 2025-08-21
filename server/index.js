@@ -4,6 +4,7 @@ import mongoose, { mongo } from "mongoose";
 import * as dotenv from "dotenv";
 import { error } from 'console';
 import PostRoute from "./routes/Posts.route.js";
+import generateImageRouter from "./routes/GenerateAI.route.js";
 
 dotenv.config();
 
@@ -11,6 +12,7 @@ const app = express();
 app.use(cors());
 app.use(express.json({ limit: "50mb"}));
 app.use(express.urlencoded({ extended: true}));
+app.use("/api/generateAIImage", generateImageRouter);
 
 app.use("/api/post", PostRoute);
 //error handling middleware
@@ -47,7 +49,8 @@ const connectDB = async () =>{
 const startServer = async () => {
     try {
     await connectDB();
-        app.listen(8080,"0.0.0.0", ()=> console.log("Server is running on port 8080"));
+        const PORT = process.env.PORT || 8080;
+        app.listen(PORT, ()=> console.log(`Server is running on http://localhost:${PORT}`));
     } catch (error) {
         console.log("Error starting the server: ",error);
     }
