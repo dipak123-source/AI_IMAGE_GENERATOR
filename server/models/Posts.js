@@ -2,15 +2,15 @@ import mongoose from "mongoose";
 
 const PostSchema = new mongoose.Schema({
     name: {
-        type: string,
+        type: String,
         required: true,
     },
     prompt: {
-        type: string,
+        type: String,
         required: true,
     },
     photo: {
-        type: string,
+        type: String,
         required: true,
     },
 });

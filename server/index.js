@@ -24,10 +24,10 @@ app.use((err, req, res, next)=>{
 
 //Default get
 app.get("/", async (req, res)=>{
-    res.send(200).json({
+    res.status(200).json({
         message: "Hello from the server!",
     });
-})
+});
 
 //function to connect to MongoDB
 const connectDB = async () =>{
@@ -37,15 +37,17 @@ const connectDB = async () =>{
     .catch((err)=>{
         console.error("Error connecting to MongoDB: ");
         console.error(err);
-    })
+    });
 }
 
 //function to start the server
 const startServer = async () => {
     try {
-        connectDB();
+    await connectDB();
         app.listen(8080,"0.0.0.0", ()=> console.log("Server is running on port 8080"));
     } catch (error) {
         console.log("Error starting the server: ",error);
     }
 }
+
+startServer();
