@@ -5,6 +5,7 @@ import CreatePost from './pages/CreatePost';
 import {BrowserRouter, Route} from 'react-router-dom';
 import { Routes } from 'react-router-dom';
 import Navbar from './components/Navbar';
+
 const Container = styled.div`
   width: 100%;
   height: 100vh;
@@ -23,14 +24,15 @@ const Wrapper = styled.div`
   justify-content: space-between;
   flex: 3;`;
 function App() {
-  return(<ThemeProvider theme={darkTheme}>
+  return(
+  <ThemeProvider theme={darkTheme}>
     <Container>
       <Wrapper>
         <BrowserRouter>
         <Navbar />
         <Routes>
-          <Route path='/' exact element = {<Home />} />
-          <Route path='/post' exact element = {<CreatePost />} />
+          <Route path="/" exact element = {<Home />} />
+          <Route path="/post" exact element = {<CreatePost />} />
         </Routes>
         </BrowserRouter>
       </Wrapper>

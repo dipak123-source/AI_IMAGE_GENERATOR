@@ -13,9 +13,9 @@ cloudinary.config({
 })
 
 
-const getAllPosts = async (req, res, next) => {
+export const getAllPosts = async (req, res, next) => {
     try {
-        const posts = await Post.find().sort({})
+        const posts = await Post.find({});
         return res
         .status(200)
         .json({
@@ -29,11 +29,11 @@ const getAllPosts = async (req, res, next) => {
                 error.status,
                 error?.response?.data?.error?.message || error.message
             )
-        )
-    }
-}
+        );
+    };
+};
 
-const createPost = async (req, res, next) =>{
+export const createPost = async (req, res, next) =>{
     try {
         const { name, prompt, photo } = req.body;
         const photoUrl = await cloudinary.uploader.upload(photo);
@@ -55,8 +55,6 @@ const createPost = async (req, res, next) =>{
                 error.status,
                 error?.response?.data?.error?.message
             )
-        )
+        );
     }
-}
-
-export { createPost, getAllPosts };
+};

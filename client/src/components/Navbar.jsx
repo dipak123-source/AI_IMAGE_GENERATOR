@@ -4,11 +4,12 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import AddRounded from '@mui/icons-material/AddRounded';
 import ExploreRounded from '@mui/icons-material/ExploreRounded'
+import { WebRounded } from '@mui/icons-material';
 
 const Container = styled.div`
   flex: 1;
   background-color: ${({ theme })=> theme.navbar};
-  color: ${({ theme })=> theme.text_primary};
+  color: ${({ theme })=> theme.menu_text_primary};
   font-size: 22px;
   padding: 14px 50px;
   display: flex;
@@ -22,21 +23,31 @@ const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const path = location.pathname.split("/");
+
+  const gotoCreatePost = () =>{
+    navigate("/post");
+  };
+  const gottoHome = ()=>{
+    navigate("/");    
+  }
   return (
     <Container>GenAI
       {
-        path[1] = 'post' ? (<Button
-        onClick={()=> navigate('/post')}
-        text="Explore Posts" leftIcon={<ExploreRounded
+        path[1] === 'post' ? (<Button
+        text="Explore Posts" 
+        leftIcon={<WebRounded
         style={{ fontSize: "18px"}}
       />}
+      onClick={gottoHome}
       type='secondary'
       />)
       :(<Button
-        onClick={()=> navigate('/post')}
-        text="create new post" leftIcon={<AddRounded
+        text="create new post" 
+        leftIcon={<AddRounded
         style={{ fontSize: "18px"}}
-      />}/>)
+      />}
+      onClick={gotoCreatePost}
+      />)
       }
     </Container>
   )

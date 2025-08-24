@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import GenerateImageForm from "../components/GenerateImageForm";
-import GeneratedImageCard from "../components/GeneratedImageCard";
+import GenerateImageForm from "../components/GenerateImageForm.jsx";
+import GeneratedImageCard from "../components/GeneratedImageCard.jsx";
 import { Photo } from "@mui/icons-material";
+
 const Container = styled.div`
     height: 100%;
     overflow-y: scroll;
@@ -15,7 +16,7 @@ const Container = styled.div`
     flex-direction: column;
     align-items: center;
     gap: 20px;
-    @media (max-width: 768) {
+    @media (max-width: 768px) {
       padding: 6px 10px
     }
 `
@@ -42,13 +43,14 @@ const Wrapper = styled.div`
     return (
         <Container>
           <Wrapper>
-            <GenerateImageForm post={post} 
+            <GenerateImageForm 
+            post={post} 
             setPost={setPost} 
             createPostLoading = {createPostLoading} 
             setCreatePostloading={setCreatePostLoading}
             generateImageLoading={generateImageLoading}
             setGenerateImageLoading={setGenerateImageLoading}/>
-            <GeneratedImageCard src={post.photo} loading={generateImageLoading} />
+            <GeneratedImageCard loading={generateImageLoading} src={post.Photo} />
           </Wrapper>
         </Container>
     )

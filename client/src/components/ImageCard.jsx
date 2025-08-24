@@ -59,7 +59,11 @@ const Author = styled.div`
 const ImageCard = ({item}) => {
   return (
    <Card>
-    <LazyLoadImage alt={item?.prompt} style={{borderRadius: "12px"}} width="100%" src = {item?.photo} />
+    <LazyLoadImage 
+    alt={item?.prompt} 
+    style={{borderRadius: "12px"}} 
+    width="100%" 
+    src = {item?.photo} />
     <HoverOverlay>
         <Prompt>{item?.prompt}</Prompt>
         <div style={{width: "100%",
@@ -68,9 +72,9 @@ const ImageCard = ({item}) => {
             justifyContent: 'space-between'
         }}>
             <Author>
-            <Avatar sx={{ width: "32px", height: "32px"}}>{item?.author[0]}</Avatar>
-            {item?.author[0]}</Author>
-            <DownloadRounded onClick={()=>FileSaver.saveAs(item?.photo,"download.jpg")}/>
+            <Avatar sx={{ width: "32px", height: "32px"}}>{item?.author[0]}</Avatar>{" "}
+            {item?.author}</Author>
+            <DownloadRounded onClick={()=>FileSaver.saveAs(item?.photo,`download.jpg`)}/>
         </div>
     </HoverOverlay>
    </Card>

@@ -5,7 +5,6 @@ import styled from 'styled-components';
 const SearchBarContainer = styled.div`
 max-width: 550px;
 display: flex;
-width: 90%;
 width: 100%;
 border: 1px solid ${({ theme })=>theme.text_secondary + 90};
 border-radius: 8px;
@@ -14,11 +13,12 @@ cursor: pointer;
 gap: 6px;
 align-items: center;
 `
-const Searchbar = () => {
+const Searchbar = ( {search, handelChange}) => {
   return (
     <SearchBarContainer>
-        <SearchOutlined />
+        <SearchOutlined sx={{color: "inherit"}}/>
         <input
+        type='text'
         placeholder='Search with prompt or name...'
         style={{
           border: 'none',
@@ -26,9 +26,11 @@ const Searchbar = () => {
           width: '100%',
           color: 'inherit',
           fontSize: '16px',
-          background: 'transparent',
-
-        }}/>
+          background: 'inherit',
+        }}
+        value={search}
+        onChange={(e)=>handelChange(e)}
+        />
     </SearchBarContainer>
   )
 }

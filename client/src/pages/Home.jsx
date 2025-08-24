@@ -1,7 +1,9 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Searchbar from '../components/Searchbar';
 import ImageCard from '../components/ImageCard';
 import styled from 'styled-components';
+import { GetPosts } from '../api';
+import { CircularProgress } from '@mui/material';
 
 const Container = styled.div`
     height: 100%;
@@ -56,27 +58,73 @@ const CardWrapper = styled.div`
      grid-template-columns: repeat(2, 1fr);}
 `
 const Home = () => {
-  const item = {
-    photo: "https://images.unsplash.com/photo-1612144431180-2d672779556c?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c21hbGwlMjBzaXplfGVufDB8fDB8fHww",
-    author: "Dipak Paswan",
-    prompt: "HEY Prompt !"
-  }
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [search, setSearch] = useState("");
+  const [filteredPost, setFilteredPost] = useState([]);
+
+  const getPosts = async ()=>{
+    setLoading(true);
+    await GetPosts()
+    .then((res)=>{
+      setPosts(res?.data?.data);
+      setFilteredPost(res?.data?.data);
+      setLoading(false);
+    })
+    .catch((error)=>{
+      setError(error?.response?.data?.message);
+      setLoading(false);
+    });
+  };
+
+  useEffect(()=>{
+    getPosts();
+  },[]);
+
+  useEffect(()=>{
+    if(!search) {
+      setFilteredPost(posts);
+    }
+    const filteredPosts = posts.filter((post)=>{
+      const promptMatch = post?.prompt?.toLowerCase().includes(search);
+      const authorMatch = post?.author?.toLowerCase().includes(search);
+
+      return promptMatch || authorMatch;
+    });
+
+    if(search) {
+      setFilteredPost(filteredPosts);
+    }
+  },[posts, search]);
   return (
     <Container>
       <Headline>Explore popular post in the Community !
         <Span>⦿ Generate with AI ⦿</Span>
       </Headline>
-      <Searchbar />
+      <Searchbar 
+      search={search}
+      handelChange={(e) => setSearch(e.target.value)}
+      />
       <Wrapper>
+        {error && <div style={{color: "red"}}>{error}</div>}
+        {loading ? (
+          <CircularProgress />
+        ) : (
         <CardWrapper>
-          <ImageCard item={item}/>
-          <ImageCard item={item}/>
-          <ImageCard item={item}/>
-          <ImageCard item={item}/>
-          <ImageCard item={item}/>
-          <ImageCard item={item}/>
-          <ImageCard item={item}/>
-        </CardWrapper>
+          {filteredPost.length > 0 ? (
+            <>
+            {filteredPost
+            .slice()
+            .reverse()
+            .map((item,  index) => (
+              <ImageCard key={index} item={item}/>
+            ))}
+            </>
+          ) : (
+            <>No Posts Found !!</>
+          )}  
+        </CardWrapper>)}
       </Wrapper>
     </Container>
   )
