@@ -1,8 +1,7 @@
 import cors from 'cors';
 import express from "express";
-import mongoose, { mongo } from "mongoose";
+import mongoose from "mongoose";
 import * as dotenv from "dotenv";
-import { error } from 'console';
 import PostRoute from "./routes/Posts.route.js";
 import generateImageRouter from "./routes/GenerateAI.route.js";
 
@@ -11,7 +10,7 @@ dotenv.config();
 const app = express();
 app.use(cors());
 app.use(express.json({ limit: "50mb"}));
-app.use(express.urlencoded({ extended: true}));
+app.use(express.urlencoded({ extended: true})); // for form data
 app.use("/api/generateAIImage", generateImageRouter);
 
 app.use("/api/post", PostRoute);

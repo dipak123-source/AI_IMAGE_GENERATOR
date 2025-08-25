@@ -20,11 +20,10 @@ export const getAllPosts = async (req, res, next) => {
         .status(200)
         .json({
             success: true,
-            message: "Posts fetched successfully",
-            data: posts,
+            data: posts
         })
     } catch (error) {
-        next(
+       return next(
             createError(
                 error.status,
                 error?.response?.data?.error?.message || error.message
@@ -40,20 +39,20 @@ export const createPost = async (req, res, next) =>{
         const newPost = await Post.create({
             name,
             prompt,
-            photo: photoUrl?.secure_url,
+            photo: photoUrl.secure_url,
         });
         return res
         .status(200)
         .json({
             success: true,
-            data: newPost,
+            data: newPost
         })
     } catch (error) {
         console.log(error);
         return next(
             createError(
                 error.status,
-                error?.response?.data?.error?.message
+                error?.response?.data?.error.message
             )
         );
     }
